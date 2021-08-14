@@ -1,17 +1,17 @@
 {
     "name": "mycostum/integracommerce-m2",
     "type": "magento2-module",
-    "version": dev-master",
+    "version": master",
     "repositories": [
     {
             "type":"package",
             "package": {
             "name": "mycostum/integracommerce-m2",
-            "version":"dev-master",
+            "version":"master",
             "source": {
                 "url": "https://github.com/mycostum/integracommerce-m2",
                 "type": "git",
-                "reference":"dev-master"
+                "reference":"master"
                 }
             }
         }
