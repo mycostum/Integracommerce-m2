@@ -1,0 +1,31 @@
+<?php
+/** @var Mycostum\IntegraCommerce\Block\Adminhtml\Sales\Order\View\Tab\InvoiceKey $block */
+?>
+<div id="<?php echo $block->getContainerId() ?>">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo __('Invoice Key Assignment') ?></span>
+    </div>
+    <div id="integracommerce_order_invoice_key">
+        <div class="integracommerce-order-invoice-key-block" id="invoice_key_form">
+            <div class="admin__field">
+                <label for="history_status" class="admin__field-label"><?= /* @noEscape */ __('Invoice Key Number') ?></label>
+                <?php if (!$block->getInvoiceKey()) : ?>
+                    <div class="admin__field-control">
+                        <input type="text" name="invoice_key_number" id="invoice_key_number" class="admin__control-text" maxlength="44"/>
+                        <div class="admin__field-note">
+                            <span><?php echo __('44 characters required. Be careful! By submitting the invoice key the order will be invoiced automatically in IntegraCommerce and this cannot be undone.') ?></span>
+                        </div>
+                    </div>
+                    <div class="order-history-comments-actions"><?= $block->getChildHtml('submit_button') ?> </div>
+                <?php else : ?>
+                    <div class="admin__field-control">
+                        <span ><?php echo $block->getInvoiceKey() ?></span>
+                        <div class="admin__field-note">
+                            <span><?php echo __('This value cannot be modified because it is already integrated with IntegraCommerce.') ?></span>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</div>

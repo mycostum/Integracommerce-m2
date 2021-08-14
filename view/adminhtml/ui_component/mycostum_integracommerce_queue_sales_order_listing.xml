@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mycostum_integracommerce_queue_sales_order_listing.mycostum_integracommerce_queue_sales_order_data_source</item>
+        </item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="clear">
+                <url path="mycostum_integracommerce/queue/clear/entity_type/sales_order"/>
+                <class>primary</class>
+                <label translate="true">Clear integration queue</label>
+            </button>
+        </buttons>
+        <spinner>category_queue_columns</spinner>
+        <deps>
+            <dep>mycostum_integracommerce_queue_sales_order_listing.mycostum_integracommerce_queue_sales_order_data_source</dep>
+        </deps>
+    </settings>
+
+    <dataSource name="mycostum_integracommerce_queue_sales_order_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Mycostum_IntegraCommerce::integracommerce_queues_sales_order</aclResource>
+        <dataProvider class="Mycostum\IntegraCommerce\Ui\Component\DataProvider" name="mycostum_integracommerce_queue_sales_order_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <settings>
+            <!--<sticky>true</sticky>-->
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="category_queue_columns">
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>50</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="reference" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Order Reference</label>
+                <sorting>asc</sorting>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>50</resizeDefaultWidth>
+            </settings>
+        </column>
+        <column name="process_type" component="Magento_Ui/js/grid/columns/select" sortOrder="50">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <options class="Mycostum\IntegraCommerce\Model\Config\Source\Queue\ProcessType"/>
+                <label translate="true">Process Type</label>
+            </settings>
+        </column>
+        <column name="messages" sortOrder="60">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Messages</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="Mycostum\IntegraCommerce\Ui\Component\Listing\Column\Queue\Product\Actions" sortOrder="900">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

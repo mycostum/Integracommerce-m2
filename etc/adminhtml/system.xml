@@ -1,0 +1,305 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mycostum" translate="label" sortOrder="10">
+            <label>Bit Tools</label>
+        </tab>
+        <section id="mycostum_integracommerce" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>IntegraCommerce Integration</label>
+            <tab>mycostum</tab>
+            <resource>Mycostum_IntegraCommerce::integracommerce_config</resource>
+
+            <!-- General Settings -->
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <comment>You are only able to configure this section by switching to store scope.</comment>
+                <field id="version" translate="label comment" type="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Module Version</label>
+                    <frontend_model>Mycostum\IntegraCommerce\Block\System\Config\Version</frontend_model>
+                    <comment>This is the current version you have installed of this module.</comment>
+                </field>
+                <field id="cron_heartbeat" translate="label comment" type="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Heartbeat Status</label>
+                    <frontend_model>Mycostum\IntegraCommerce\Block\System\Config\Cron\Heartbeat</frontend_model>
+                    <comment>This field indicates if your cron configuration is set correctly by using a heartbeat job that runs every minute. If the heartbeat is longer than 1 hour there's probably a problem with the crontab.</comment>
+                </field>
+                <field id="enabled" translate="label" type="select" sortOrder="30" showInDefault="0" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <!-- Log Settings -->
+            <group id="log" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Log Configuration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="filename" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Log Filename</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- API Service Configuration -->
+            <group id="service" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>API Service Configuration</label>
+                <comment>You are only able to configure this section by switching to store scope.</comment>
+                <field id="base_uri" translate="label" type="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Base URI</label>
+                    <frontend_model>Mycostum\IntegraCommerce\Block\System\Config\Base</frontend_model>
+                </field>
+                <field id="email" translate="label" type="text" sortOrder="20" showInDefault="0" showInWebsite="1" showInStore="1" canRestore="0">
+                    <label>Email</label>
+                </field>
+                <field id="api_key" translate="label" type="obscure" sortOrder="30" showInDefault="0" showInWebsite="1" showInStore="1" canRestore="0">
+                    <label>API Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+
+            <!-- Invoice Key Configuration -->
+            <!--
+            <group id="invoice_key" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Invoice Key Configuration</label>
+                <field id="pattern" translate="label" sortOrder="10" showInDefault="0" showInWebsite="1" showInStore="1">
+                    <label>Invoice Key Commit Pattern</label>
+                </field>
+            </group>
+            -->
+
+            <!-- Catalog Integration Settings -->
+            <group id="catalog" translate="label comment" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Catalog Integration Settings</label>
+                <field id="immediately_integrate_product_after_sensitive_change" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Immediately integrate product on sensitive changes (price or stock)</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>After saving a product, it will force real time integration if has changes on attributes: Price, Stock</comment>
+                </field>
+                <field id="product_visibility" translate="label" type="multiselect" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Integrate Product Only With These Visibilities</label>
+                    <source_model>Magento\Catalog\Model\Product\Visibility</source_model>
+                    <comment>Magento will send to Integracommerce only the products with the selected visibilities above.</comment>
+                </field>
+            </group>
+
+            <!-- SALES ORDER STATUS -->
+            <group id="sales_order_status" translate="label comment" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Order Status Configuration</label>
+
+                <field id="new_order_status" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>New Order Status</label>
+                    <source_model>Mycostum\IntegraCommerce\Model\Config\Source\Integration\Order\Status\NewOrders</source_model>
+                    <comment>When the order has the NEW status type in IntegraCommerce Magento will put the order in this status.</comment>
+                </field>
+
+                <field id="approved_order_status" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Approved Order Status</label>
+                    <source_model>Mycostum\IntegraCommerce\Model\Config\Source\Integration\Order\Status\ApprovedOrders</source_model>
+                    <comment>When the order has the APPROVED status type in IntegraCommerce Magento will put the order in this status.</comment>
+                </field>
+
+                <field id="delivered_order_status" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Delivered Order Status</label>
+                    <source_model>Mycostum\IntegraCommerce\Model\Config\Source\Integration\Order\Status\CompleteOrders</source_model>
+                    <comment>When the order has the DELIVERED status type in IntegraCommerce Magento will put the order in this status.</comment>
+                </field>
+
+                <field id="shipment_exception_order_status" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Shipment Exception Order Status</label>
+                    <source_model>Mycostum\IntegraCommerce\Model\Config\Source\Integration\Order\Status\CompleteOrders</source_model>
+                    <comment>When the order has the SHIPMENT_EXCEPTION status type in IntegraCommerce Magento will put the order in this status.</comment>
+                </field>
+            </group>
+
+            <!-- CATALOG PRODUCT ATTRIBUTES -->
+            <group id="cron_catalog_product_attribute" translate="label comment" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Attributes Cron Configuration</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="queue_create" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Product Attributes Queue Generate</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="queue_execute" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Product Attributes Queue Execute</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- CATALOG PRODUCTS -->
+            <group id="cron_catalog_product" translate="label comment" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Cron Configuration</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="queue_create" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Products Queue Create Expression</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="queue_create_limit" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Products Queue Create Limit</label>
+                    <comment>The amount of products to be queued per time. The default quantity is 500 at time.</comment>
+                    <frontend_class>validate-number validate-greater-than-zero</frontend_class>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="queue_execute" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Products Queue Execute Expression</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="queue_execute_limit" translate="label comment" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Products Queue Execute Limit</label>
+                    <comment>The amount of products to be integrated per time. The default quantity is 500 at time.</comment>
+                    <frontend_class>validate-number validate-greater-than-zero</frontend_class>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- CATALOG CATEGORIES -->
+            <group id="cron_catalog_category" translate="label comment" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Category Cron Configuration</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="queue_create" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Categories Queue Create Expression</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="queue_execute" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Categories Queue Execute Expression</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- SALES ORDER STATUS -->
+            <group id="cron_sales_order_status" translate="label comment" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Order Status Cron Configuration</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="queue_create" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Queue Create Expression</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="queue_execute" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Queue Execute Expression</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <!-- SALES ORDER QUEUE -->
+            <group id="cron_sales_order_import" translate="label comment" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Order Import Cron Configuration</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="expression" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Queue Execute</label>
+                    <comment>Note that this must be a cron expression format.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="limit" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Limit</label>
+                    <comment>The amount of products to be integrated per time. The default quantity is 500 at time.</comment>
+                    <frontend_class>validate-number validate-greater-than-zero</frontend_class>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="use_default_increment_id" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Use Default Order Sequence Number</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If DISABLED the default order sequence number will be replaced by the IntegraCommerce order code (applied only to imported orders).</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="method_shipping" translate="label comment" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Method Shipping Default</label>
+                <field id="marketplaces" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Marketplaces</label>
+                    <comment>When selected, is created a order with selected shipping method and ignore integracommerce data</comment>
+                    <frontend_model>Mycostum\IntegraCommerce\Block\Adminhtml\Sales\Order\Shipment\Marketplace\Channel</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+
+            <group id="customer_address" translate="label comment" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Customer Address</label>
+                <field id="concat_complement" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Concat fields (complement, reference, detail) in Complement Customer Address</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+
+            <group id="blacklist_catalog_product" translate="label comment" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Blacklist Catalog Product Attributes</label>
+                <field id="attributes" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Attributes</label>
+                    <comment>When selected, this attributes don't send integracommerce.</comment>
+                    <frontend_model>Mycostum\IntegraCommerce\Block\Adminhtml\Attributes\Blacklist</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

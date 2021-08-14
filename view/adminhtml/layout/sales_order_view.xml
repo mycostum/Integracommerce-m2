@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <block class="Mycostum\IntegraCommerce\Block\Adminhtml\Sales\Order\View\Tab\InvoiceKey" name="mycostum_integracommerce.invoice_key"/>
+        <referenceBlock name="sales_order_tabs">
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">mycostum_integracommerce_order_data_source</argument>
+                <argument name="block" xsi:type="string">Mycostum\IntegraCommerce\Block\Adminhtml\Sales\Order\View\Tab\IntegracommerceDataSource</argument>
+                <argument name="afterId" xsi:type="string">order_history</argument>
+            </action>
+            <action method="addTabAfter">
+                <argument name="name" xsi:type="string">mycostum_integracommerce_invoice_key</argument>
+                <argument name="block" xsi:type="string">Mycostum\IntegraCommerce\Block\Adminhtml\Sales\Order\View\Tab\InvoiceKey</argument>
+                <argument name="afterId" xsi:type="string">order_history</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="order_info">
+            <block name="mycostum_integracommerce.integracommerce_info" class="Mycostum\IntegraCommerce\Block\Adminhtml\Sales\Order\View\IntegracommerceInfo" template="Mycostum_IntegraCommerce::order/view/integracommerce_info.phtml"/>
+        </referenceBlock>
+    </body>
+</page>

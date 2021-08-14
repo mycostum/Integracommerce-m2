@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Mycostum\IntegraCommerce\Model\Catalog\Product\Attributes\Mapping">
+        <arguments>
+            <argument name="resource" xsi:type="object">Mycostum\IntegraCommerce\Model\ResourceModel\Catalog\Product\Attributes\Mapping</argument>
+            <argument name="resourceCollection" xsi:type="object">Mycostum\IntegraCommerce\Model\ResourceModel\Catalog\Product\Attributes\Mapping\Collection</argument>
+            <argument name="data" xsi:type="array"/>
+        </arguments>
+    </type>
+
+    <type name="Mycostum\IntegraCommerce\Model\Sales\AdminOrder\Create">
+        <arguments>
+            <argument name="quoteSession" xsi:type="object">Mycostum\IntegraCommerce\Model\Backend\Session\Quote</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="OrderRelationsComposite">
+        <arguments>
+            <argument name="relationProcessors" xsi:type="array">
+                <item name="integracommerce" xsi:type="object">Mycostum\IntegraCommerce\Model\ResourceModel\Sales\Order\Relation</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+
+    <!-- *********************************************************************************************************** -->
+    <!-- CUSTOM CONFIGURATION DECLARATION (integracommerce.xml)                                                               -->
+    <!-- *********************************************************************************************************** -->
+
+    <virtualType name="IntegracommerceReader" type="Magento\Framework\Config\Reader\Filesystem">
+        <arguments>
+            <argument name="converter" xsi:type="object">Mycostum\IntegraCommerce\Model\Config\IntegracommerceAttributes\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">Mycostum\IntegraCommerce\Model\Config\IntegracommerceAttributes\SchemaLocator</argument>
+            <argument name="fileName" xsi:type="string">integracommerce.xml</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Mycostum\IntegraCommerce\Model\Config\IntegracommerceAttributes\Data">
+        <arguments>
+            <argument name="reader" xsi:type="object">IntegracommerceReader</argument>
+            <argument name="cacheId" xsi:type="string">mycostum_integracommerce_attributes_cache</argument>
+        </arguments>
+    </type>
+
+    <!-- *********************************************************************************************************** -->
+    <!-- SERVICE CONTRACTS DECLARATIONS                                                                              -->
+    <!-- *********************************************************************************************************** -->
+
+    <preference for="Mycostum\IntegraCommerce\Api\ProductAttributeMappingRepositoryInterface" type="Mycostum\IntegraCommerce\Model\Catalog\Product\Attributes\MappingRepository"/>
+    <preference for="Mycostum\IntegraCommerce\Api\Data\ProductAttributeMappingInterface" type="Mycostum\IntegraCommerce\Model\Catalog\Product\Attributes\Mapping"/>
+
+    <preference for="Mycostum\IntegraCommerce\Api\CustomerAttributeMappingRepositoryInterface" type="Mycostum\IntegraCommerce\Model\Customer\Attributes\MappingRepository"/>
+    <preference for="Mycostum\IntegraCommerce\Api\Data\CustomerAttributeMappingInterface" type="Mycostum\IntegraCommerce\Model\Customer\Attributes\Mapping"/>
+    <preference for="Mycostum\IntegraCommerce\Api\CustomerAttributeMappingOptionsRepositoryInterface" type="Mycostum\IntegraCommerce\Model\Customer\Attributes\Mapping\OptionsRepository"/>
+    <preference for="Mycostum\IntegraCommerce\Api\Data\CustomerAttributeMappingOptionsInterface" type="Mycostum\IntegraCommerce\Model\Customer\Attributes\Mapping\Options"/>
+
+    <preference for="Mycostum\IntegraCommerce\Api\QueueRepositoryInterface" type="Mycostum\IntegraCommerce\Model\QueueRepository"/>
+    <preference for="Mycostum\IntegraCommerce\Api\Data\Data\QueueInterface" type="Mycostum\IntegraCommerce\Model\Queue"/>
+
+    <preference for="Mycostum\IntegraCommerce\Api\Data\SalesOrderExtensionAttributeInterface" type="Mycostum\IntegraCommerce\Model\Sales\Order\AdditionalInfo"/>
+
+    <preference for="Mycostum\IntegraCommerce\Api\Data\OrderInterface" type="Mycostum\IntegraCommerce\Model\Order"/>
+    <preference for="Mycostum\IntegraCommerce\Api\OrderRepositoryInterface" type="Mycostum\IntegraCommerce\Model\OrderRepository"/>
+
+    <preference for="Mycostum\IntegraCommerce\Api\OrderManagementInterface" type="Mycostum\IntegraCommerce\Model\Sales\Order"/>
+
+    <preference for="Mycostum\IntegraCommerce\Model\StoreIteratorInterface" type="Mycostum\IntegraCommerce\Model\StoreIterator"/>
+
+    <!-- *********************************************************************************************************** -->
+    <!-- TERMINAL COMMANDS DECLARATIONS                                                                              -->
+    <!-- *********************************************************************************************************** -->
+
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="integrateCatalogCategory" xsi:type="object">Mycostum\IntegraCommerce\Console\Integration\Catalog\IntegrateCategory</item>
+                <item name="integrateCatalogProduct" xsi:type="object">Mycostum\IntegraCommerce\Console\Integration\Catalog\IntegrateProduct</item>
+                <item name="integrateCatalogProductAttribute" xsi:type="object">Mycostum\IntegraCommerce\Console\Integration\Catalog\IntegrateProductAttribute</item>
+                <item name="integrateSalesOrder" xsi:type="object">Mycostum\IntegraCommerce\Console\Integration\Sales\IntegrateOrder</item>
+
+                <item name="createSalesOrderStatusQueue" xsi:type="object">Mycostum\IntegraCommerce\Console\Queue\Sales\Order\Status\Create</item>
+                <item name="executeSalesOrderStatusQueue" xsi:type="object">Mycostum\IntegraCommerce\Console\Queue\Sales\Order\Status\Execute</item>
+
+                <item name="executeSalesOrderQueueImport" xsi:type="object">Mycostum\IntegraCommerce\Console\Queue\Sales\Order\Import</item>
+
+                <item name="createCatalogProductAttributesQueue" xsi:type="object">Mycostum\IntegraCommerce\Console\Queue\Catalog\Product\Attribute\Create</item>
+                <item name="executeCatalogProductAttributesQueue" xsi:type="object">Mycostum\IntegraCommerce\Console\Queue\Catalog\Product\Attribute\Execute</item>
+
+                <item name="createCatalogCategoriesQueue" xsi:type="object">Mycostum\IntegraCommerce\Console\Queue\Catalog\Category\Create</item>
+                <item name="executeCategoriesQueue" xsi:type="object">Mycostum\IntegraCommerce\Console\Queue\Catalog\Category\Execute</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- *********************************************************************************************************** -->
+    <!-- PLUGINS DECLARATIONS                                                                                        -->
+    <!-- *********************************************************************************************************** -->
+
+    <type name="Magento\Sales\Api\Data\OrderInterface">
+        <plugin name="integracommerce_information" type="Mycostum\IntegraCommerce\Plugin\Sales\Order"/>
+    </type>
+
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="integracommerce_information" type="Mycostum\IntegraCommerce\Plugin\Sales\OrderRepository"/>
+    </type>
+
+    <!-- *********************************************************************************************************** -->
+    <!--  LISTING UI COMPONENTS                                                                                      -->
+    <!-- *********************************************************************************************************** -->
+
+    <virtualType name="Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Catalog\Product\Attribute\Mapping\Product" type="Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mycostum_integracommerce_product_attributes_mapping</argument>
+            <argument name="resourceModel" xsi:type="string">Mycostum\IntegraCommerce\Model\ResourceModel\Catalog\Product\Attributes\Mapping</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Customer\Attribute\Mapping\Customer" type="Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mycostum_integracommerce_customer_attributes_mapping</argument>
+            <argument name="resourceModel" xsi:type="string">Mycostum\IntegraCommerce\Model\ResourceModel\Customer\Attributes\Mapping</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Queue\Sales\Order" type="Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Queue">
+        <arguments>
+            <argument name="entityType" xsi:type="string">sales_order</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mycostum_integracommerce_catalog_product_attributes_mapping_listing_data_source" xsi:type="string">Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Catalog\Product\Attribute\Mapping\Product</item>
+                <item name="mycostum_integracommerce_customer_attributes_mapping_data_source" xsi:type="string">Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Customer</item>
+                <item name="mycostum_integracommerce_queue_product_data_source" xsi:type="string">Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Queue\Catalog\Product</item>
+                <item name="mycostum_integracommerce_queue_product_attribute_data_source" xsi:type="string">Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Queue\Catalog\ProductAttribute</item>
+                <item name="mycostum_integracommerce_queue_category_data_source" xsi:type="string">Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Queue\Catalog\Category</item>
+                <item name="mycostum_integracommerce_queue_sales_order_data_source" xsi:type="string">Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Queue\Sales\Order</item>
+                <item name="mycostum_integracommerce_queue_sales_order_status_data_source" xsi:type="string">Mycostum\IntegraCommerce\Ui\Component\DataProvider\SearchResult\Queue\Sales\OrderStatus</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

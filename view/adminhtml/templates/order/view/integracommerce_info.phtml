@@ -1,0 +1,17 @@
+<?php
+/** @var Mycostum\IntegraCommerce\Block\Adminhtml\Sales\Order\View\IntegracommerceInfo $block */
+?>
+<?php if ($block->canDisplay()) : ?>
+    <?php if ($block->getIntegracommerceCode()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('IntegraCommerce Code')) ?></th>
+        <td><span id="integracommerce_code"><?= $block->escapeHtml($block->getIntegracommerceCode()) ?></span></td>
+    </tr>
+    <?php endif; ?>
+    <?php if ($block->getIntegracommerceChannel()) : ?>
+    <tr>
+        <th><?= $block->escapeHtml(__('IntegraCommerce Channel')) ?></th>
+        <td><span id="integracommerce_channel"><?= $block->escapeHtml($block->getIntegracommerceChannel()) ?></span></td>
+    </tr>
+    <?php endif; ?>
+<?php endif; ?>

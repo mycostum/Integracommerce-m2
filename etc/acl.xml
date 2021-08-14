@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Mycostum_IntegraCommerce::mycostum" title="IntegraCommerce" translate="title" sortOrder="90">
+                    <resource id="Mycostum_IntegraCommerce::integracommerce" title="IntegraCommerce Integration" translate="title" sortOrder="10">
+                        <resource id="Mycostum_IntegraCommerce::integracommerce_attributes_mapping" title="Attributes Mapping" translate="title" sortOrder="10">
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_product_attributes_mapping" title="View Product Attributes Mapping" translate="title" sortOrder="10"/>
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_product_attributes_mapping_save" title="Save Product Attributes Mapping" translate="title" sortOrder="20"/>
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_customer_attributes_mapping" title="View Customer Attributes Mapping" translate="title" sortOrder="30"/>
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_customer_attributes_mapping_save" title="Save Customer Attributes Mapping" translate="title" sortOrder="40"/>
+                        </resource>
+                        <resource id="Mycostum_IntegraCommerce::integracommerce_queues" title="Queues" translate="title" sortOrder="30">
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_queues_catalog_product" title="View Catalog Products Queue" translate="title" sortOrder="10"/>
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_queues_catalog_product_attribute" title="View Catalog Product Attributes Queue" translate="title" sortOrder="20"/>
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_queues_catalog_category" title="View Catalog Category Queue" translate="title" sortOrder="30"/>
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_queues_sales_order" title="View Sales Order Queue" translate="title" sortOrder="40"/>
+                            <resource id="Mycostum_IntegraCommerce::integracommerce_queues_sales_order_status" title="View Sales Order Status Queue" translate="title" sortOrder="40"/>
+                        </resource>
+                        <resource id="Mycostum_IntegraCommerce::orders_import" title="Orders Importation" translate="title" sortOrder="40">
+                            <resource id="Mycostum_IntegraCommerce::manual_import" title="Manual Import" translate="title" sortOrder="10"/>
+                            <resource id="Mycostum_IntegraCommerce::orders_import_log" title="Log" translate="title" sortOrder="20"/>
+                        </resource>
+                        <resource id="Mycostum_IntegraCommerce::configuration" title="Configuration" translate="title" sortOrder="40">
+                            <resource id="Mycostum_IntegraCommerce::module_configuration" title="Module Configuration" translate="title" sortOrder="10"/>
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Mycostum_IntegraCommerce::mycostum_config" title="IntegraCommerce Section" translate="title" sortOrder="10">
+                                <resource id="Mycostum_IntegraCommerce::integracommerce_config" title="Integracommerce Integration Settings" translate="title" sortOrder="10" />
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

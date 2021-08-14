@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mycostum_integracommerce_order_import_exception">
+        <observer name="mycostum_integracommerce_log_order_details" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\LogOrderDetailsOnImportException" />
+    </event>
+
+    <!-- CATALOG EVENTS -->
+    <event name="catalog_product_save_commit_after">
+        <observer name="mycostum_integracommerce_integrate_catalog_product" instance="Mycostum\IntegraCommerce\Observer\Catalog\Product\IntegrateProduct"/>
+    </event>
+    <event name="mycostum_integracommerce_store_iterate_exception">
+        <observer name="mycostum_integracommerce_integrate_catalog_product_exception" instance="Mycostum\IntegraCommerce\Observer\Catalog\Product\GetExceptionIntegrateProduct"/>
+    </event>
+    <!--
+    The product cannot be deleted from IntegraCommerce when it's already related to any order.
+    <event name="catalog_product_delete_after">
+        <observer name="mycostum_integracommerce_delete_catalog_product" instance="Mycostum\IntegraCommerce\Observer\Catalog\Product\IntegrateProduct"/>
+    </event>
+    -->
+    <event name="catalog_product_delete_before">
+        <observer name="mycostum_integracommerce_integrate_catalog_product" instance="Mycostum\IntegraCommerce\Observer\Catalog\Product\DisableProduct"/>
+    </event>
+    <event name="catalog_entity_attribute_save_after">
+        <observer name="mycostum_integracommerce_integrate_catalog_product_attribute" instance="Mycostum\IntegraCommerce\Observer\Catalog\Product\Attribute\IntegrateProductAttribute"/>
+    </event>
+    <event name="catalog_category_save_after">
+        <observer name="mycostum_integracommerce_integrate_catalog_category" instance="Mycostum\IntegraCommerce\Observer\Catalog\Category\IntegrateCategory"/>
+    </event>
+    <event name="catalog_category_delete_after">
+        <observer name="mycostum_integracommerce_delete_catalog_category" instance="Mycostum\IntegraCommerce\Observer\Catalog\Category\DeleteCategory"/>
+    </event>
+
+    <!-- SALES EVENTS -->
+    <event name="order_cancel_after">
+        <observer name="mycostum_integracommerce_order_cancel_after" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\CancelOrderAfter" />
+        <observer name="mycostum_integracommerce_reintegrate_order_products" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\ReIntegrateOrderProducts" />
+    </event>
+    <event name="sales_order_save_after">
+        <observer name="mycostum_integracommerce_process_complete_status_order" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\Status\ProcessCompleteStatusOrder"/>
+    </event>
+    <event name="sales_model_service_quote_submit_success">
+        <observer name="mycostum_integracommerce_reintegrate_order_products" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\ReIntegrateOrderProducts" />
+    </event>
+    <event name="sales_order_shipment_track_save_after">
+        <observer name="mycostum_integracommerce_integrate_shipment_track" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\Shipment\IntegrateOrderShipmentTracking"/>
+    </event>
+    <event name="sales_order_creditmemo_refund">
+        <observer name="mycostum_integracommerce_cancel_order_after_refund" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\Creditmemo\CancelOrderAfterRefund"/>
+    </event>
+
+    <!-- INVOICE KEY -->
+    <event name="mycostum_integracommerce_order_relation_save_after">
+        <observer name="mycostum_integracommerce_integrate_invoice_key" instance="Mycostum\IntegraCommerce\Observer\Sales\Order\Invoice\IntegrateInvoiceKey"/>
+    </event>
+</config>
