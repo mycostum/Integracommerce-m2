@@ -2,6 +2,20 @@
     "name": "mycostum/integracommerce-m2",
     "type": "magento2-module",
     "version": "1.0.14",
+    "repositories": [
+    {
+            "type":"package",
+            "package": {
+            "name": "mycostum/integracommerce-m2",
+            "version":"master",
+            "source": {
+                "url": "https://github.com/mycostum/integracommerce-m2",
+                "type": "git",
+                "reference":"master"
+                }
+            }
+        }
+    ],
     "require": {
         "mycostum/integracommerce-php": "~1.2.0"
     },
