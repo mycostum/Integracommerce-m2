@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "mycostum/integracommerce-php": "dev-master@dev"
+        "mycostum/integracommerce-php": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": ">=7.0.*@dev"
