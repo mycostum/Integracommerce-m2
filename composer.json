@@ -7,11 +7,11 @@
             "type":"package",
             "package": {
             "name": "mycostum/integracommerce-m2",
-            "version":"master",
+            "version":"1.0",
             "source": {
                 "url": "https://github.com/mycostum/integracommerce-m2",
                 "type": "git",
-                "reference":"master"
+                "reference":"1.0"
                 }
             }
         }
@@ -33,5 +33,5 @@
             "Mycostum\\IntegraCommerce\\": ""
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
