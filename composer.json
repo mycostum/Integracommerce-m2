@@ -33,5 +33,5 @@
             "Mycostum\\IntegraCommerce\\": ""
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
