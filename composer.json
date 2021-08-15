@@ -20,7 +20,7 @@
         "mycostum/integracommerce-php": "dev-main@dev"
     },
     "require-dev": {
-        "phpunit/phpunit": ">=7.0"
+        "phpunit/phpunit": ">=7.0.*@dev"
     },
     "support": {
         "description": "If you need help, Access https://clhosting.com.b/requests/new for questions and other requests."
@@ -33,5 +33,5 @@
             "Mycostum\\IntegraCommerce\\": ""
         }
     },
-    "minimum-stability": "RC"
+    "minimum-stability": "dev"
 }
