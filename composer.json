@@ -20,11 +20,11 @@
         "mycostum/integracommerce-php": "dev-master"
     },
     "require-dev": {
-<<<<<<< Updated upstream
-        "phpunit/phpunit": ">=7.0.*@dev"
-=======
-        "phpunit/phpunit": ">=7.4"
->>>>>>> Stashed changes
+
+        "phpunit/phpunit": ">=7.0"
+
+      
+
     },
     "support": {
         "description": "If you need help, Access https://clhosting.com.b/requests/new for questions and other requests."
@@ -37,5 +37,5 @@
             "Mycostum\\IntegraCommerce\\": ""
         }
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "stable"
 }
